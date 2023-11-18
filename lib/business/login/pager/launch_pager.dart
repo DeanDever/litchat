@@ -57,7 +57,7 @@ class _LaunchPagerState extends State<LaunchPager> with SingleTickerProviderStat
             top: 0,
             bottom: 0,
             child: Image.asset(
-              'asstes/app_launch_img_png',
+              'assets/app_launch_img.png',
               fit: BoxFit.fill,
             ),
           ),
@@ -68,7 +68,7 @@ class _LaunchPagerState extends State<LaunchPager> with SingleTickerProviderStat
               height: 30,
               child: CupertinoButton(
                 color: const Color(0x70FFFFFF),
-                padding: EdgeInsets.only(left: 10, right: 10),
+                padding: const EdgeInsets.only(left: 10, right: 10),
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
                 child: Text(
                   S.of(context).launch_skip_btn(_countDownTime),

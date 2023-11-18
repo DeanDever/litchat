@@ -1,0 +1,31 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/DeanDever/DNESpecs.git'
+
+use_frameworks!
+
+platform :ios, '9.0'
+
+inhibit_all_warnings!
+
+install! 'cocoapods', :deterministic_uuids => false, :warn_for_multiple_pod_sources => false, :warn_for_unused_master_specs_repo => false
+
+
+target 'DNENetwork_Example' do
+  pod 'DNENetwork', :path => '../'
+
+  target 'DNENetwork_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase'
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 9.0
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      end
+    end
+  end
+end

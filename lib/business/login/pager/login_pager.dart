@@ -14,7 +14,16 @@ class _LoginPagerState extends State<LoginPager> with SingleTickerProviderStateM
     return Scaffold(
       body: Stack(
         children: [
-
+          Positioned(
+            right:0,
+            left: 0,
+            top: 0,
+            bottom: 0,
+            child: Image.asset(
+              'assets/app_launch_img.png',
+              fit: BoxFit.fill,
+            ),
+          ),
         ],
       ),
     );

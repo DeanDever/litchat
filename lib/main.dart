@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         S.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
+      // locale: const Locale('cn'),
       routes: {
         '/': (BuildContext context) => const LaunchPager(),
         '/Login': (BuildContext context) => const LoginPager(),

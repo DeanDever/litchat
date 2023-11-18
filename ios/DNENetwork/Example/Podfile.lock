@@ -1,0 +1,70 @@
+PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - CocoaLumberjack (3.4.2):
+    - CocoaLumberjack/Default (= 3.4.2)
+    - CocoaLumberjack/Extensions (= 3.4.2)
+  - CocoaLumberjack/Default (3.4.2)
+  - CocoaLumberjack/Extensions (3.4.2):
+    - CocoaLumberjack/Default
+  - DNELog (1.0.0):
+    - CocoaLumberjack (~> 3.4.2)
+  - DNENetwork (1.0.4):
+    - AFNetworking (~> 4.0)
+    - DNELog
+    - YYCategories
+    - YYModel
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
+    - FBSnapshotTestCase/Core
+  - YYCategories (1.0.4):
+    - YYCategories/no-arc (= 1.0.4)
+  - YYCategories/no-arc (1.0.4)
+  - YYModel (1.0.4)
+
+DEPENDENCIES:
+  - DNENetwork (from `../`)
+  - FBSnapshotTestCase
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - CocoaLumberjack
+  https://github.com/DeanDever/DNESpecs.git:
+    - DNELog
+  trunk:
+    - AFNetworking
+    - FBSnapshotTestCase
+    - YYCategories
+    - YYModel
+
+EXTERNAL SOURCES:
+  DNENetwork:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
+  DNELog: e8c85211d9af12a5b4cc228de1ed4a50203cf112
+  DNENetwork: 9aaa608b363fec5bf3e6dcc7da646857f68dd6d9
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+
+PODFILE CHECKSUM: 4620fd0db9523563a032bab8665fd19079807a99
+
+COCOAPODS: 1.10.0
