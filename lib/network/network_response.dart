@@ -7,7 +7,7 @@ class NetworkResponse {
   @JsonKey(name: 'status')
   int status = -1;
   @JsonKey(name: 'content')
-  Map? content;
+  Map<String, dynamic>? content;
   @JsonKey(name: 'error')
   String? error;
 

@@ -7,16 +7,26 @@ enum NetworkRequestType {
 }
 
 enum NetworkDataSerializableType {
-  JSON,
-  HTTP
+  json,
+  http
 }
 
 abstract class NetworkAPI {
 
-  NetworkRequestType requestType = NetworkRequestType.get;
+  NetworkRequestType get requestType {
+    return NetworkRequestType.get;
+  }
 
-  NetworkDataSerializableType serializableType = NetworkDataSerializableType.JSON;
+  NetworkDataSerializableType get serializableType {
+    return NetworkDataSerializableType.json;
+  }
 
-  String uri();
+  bool get enableCache {
+    return false;
+  }
+
+  String get uri {
+    return '';
+  }
 
 }
