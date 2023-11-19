@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:litchat/generated/l10n.dart';
@@ -34,7 +33,7 @@ class _LoginPagerState extends State<LoginPager>
 
   void _loadAnimation() async {
     final videoItem =
-        await SVGAParser.shared.decodeFromAssets('asstes/svga/login_bg.svga');
+        await SVGAParser.shared.decodeFromAssets('assets/svga/login_bg.svga');
     setState(() {
       _bgController?.videoItem = videoItem;
       _playAnimation();
@@ -104,80 +103,89 @@ class _LoginPagerState extends State<LoginPager>
             title,
             maxLines: 2,
             textAlign: TextAlign.start,
+            style: const TextStyle(fontSize: 14),
           ),
           style: ButtonStyle(
-              textStyle: MaterialStateProperty.all(const TextStyle(
-                color: Color(0xFF000000),
-                fontSize: 14,
-              )),
-              padding:
-                  MaterialStateProperty.all(const EdgeInsets.only(left: 16)),
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24))),
-              backgroundColor:
-                  MaterialStateProperty.all(const Color(0xFFFFFFFF)),
-              iconSize: MaterialStateProperty.all(48)),
+            foregroundColor: MaterialStateProperty.all(const Color(0xFF000000)),
+            padding: MaterialStateProperty.all(const EdgeInsets.only(right: 16)),
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24))),
+            backgroundColor: MaterialStateProperty.all(const Color(0xFFFFFFFF)),
+            iconSize: MaterialStateProperty.all(48),
+            alignment: Alignment.centerLeft,
+          ),
         ),
       ),
     );
   }
 
   Widget _generateCircleLoginButton(AssetImage image, VoidCallback onPressed) {
-    return CupertinoButton(
-      child: Image(
-        image: image,
-        fit: BoxFit.fitWidth,
+    return SizedBox(
+      width: 48,
+      height: 48,
+      child: IconButton(
+        icon: Image(
+          image: image,
+          fit: BoxFit.fitHeight,
+        ),
+        // iconSize: 48,
+        enableFeedback: true,
+        padding: const EdgeInsets.all(0),
+        onPressed: onPressed,
       ),
-      onPressed: () {
-        _onClickFacebookButton();
-      },
     );
   }
 
+  Widget _generateFacebookButton() {
+    if (Theme.of(context).platform == TargetPlatform.android) {
+      return _generateCircleLoginButton(
+        const AssetImage('assets/login/login_fb_btn.png'),
+        () {
+          _onClickFacebookButton();
+        },
+      );
+    }
+    return const SizedBox(width: 0, height: 48);
+  }
+
+  Widget _generateAppleButton() {
+    if (Theme.of(context).platform == TargetPlatform.iOS) {
+      return _generateCircleLoginButton(
+        const AssetImage('assets/login/login_apple_btn.png'),
+        () {
+          _onClickAppleButton();
+        },
+      );
+    }
+    return const SizedBox(width: 0, height: 48);
+  }
+
   Widget _generateMoreLoginButton() {
+    bool isAndroid = Theme.of(context).platform == TargetPlatform.android;
+    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     return Positioned(
       bottom: 88,
-      child: Flex(
-        direction: Axis.horizontal,
+      left: 10,
+      right: 10,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            flex: 2,
-            child: _generateCircleLoginButton(
-              const AssetImage('assets/login/login_fb_btn.png'),
-              () {
-                _onClickFacebookButton();
-              },
-            ),
+          _generateFacebookButton(),
+          SizedBox(width: isAndroid ? 24 : 0, height: 48),
+          _generateCircleLoginButton(
+            const AssetImage('assets/login/login_line_btn.png'),
+            () {
+              _onClickLineButton();
+            },
           ),
-          const Spacer(flex: 1),
-          Expanded(
-            flex: 2,
-            child: _generateCircleLoginButton(
-              const AssetImage('assets/login/login_line_btn.png'),
-              () {
-                _onClickLineButton();
-              },
-            ),
-          ),
-          const Spacer(flex: 1),
-          Expanded(
-            flex: 2,
-            child: _generateCircleLoginButton(
-              const AssetImage('assets/login/login_apple_btn.png'),
-              () {
-                _onClickAppleButton();
-              },
-            ),
-          ),
-          const Spacer(flex: 1),
-          Expanded(
-            flex: 2,
-            child: _generateCircleLoginButton(
-              const AssetImage('assets/login/login_mail_btn.png'),
-              () {
-                _onClickMailButton();
-              },
-            ),
+          const SizedBox(width: 24, height: 48),
+          _generateAppleButton(),
+          SizedBox(width: isIOS ? 24 : 0, height: 48),
+          _generateCircleLoginButton(
+            const AssetImage('assets/login/login_email_btn.png'),
+            () {
+              _onClickMailButton();
+            },
           ),
         ],
       ),
@@ -187,17 +195,26 @@ class _LoginPagerState extends State<LoginPager>
   Widget _generatePrivacy() {
     return Positioned(
       bottom: 24,
+      right: 10,
+      left: 10,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ElevatedButton(
-            onPressed: () {
-              _onClickAgreePrivacyButton();
-            },
-            child: Image.asset(
-              _isAgreePrivacy
-                  ? 'assets/common/common_checked_img.png'
-                  : 'assets/common/common_uncheck_img.png',
-              fit: BoxFit.fitWidth,
+          SizedBox(
+            width: 24,
+            height: 24,
+            child: IconButton(
+              icon: Image.asset(
+                _isAgreePrivacy
+                    ? 'assets/common/common_checked_img.png'
+                    : 'assets/common/common_uncheck_img.png',
+                fit: BoxFit.fitWidth,
+              ),
+              iconSize: 24,
+              padding: const EdgeInsets.all(4),
+              onPressed: () {
+                _onClickAgreePrivacyButton();
+              },
             ),
           ),
           Text.rich(
@@ -212,6 +229,8 @@ class _LoginPagerState extends State<LoginPager>
                   text: S.of(context).user_agreement_user_privacy_policy,
                   style: const TextStyle(
                     decoration: TextDecoration.underline,
+                    decorationColor: Color(0xFFFFFFFF),
+                    decorationThickness: 2,
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTapUp = (details) {
@@ -240,10 +259,12 @@ class _LoginPagerState extends State<LoginPager>
               _bgController!,
               fit: BoxFit.fill,
               clearsAfterStop: true,
-              allowDrawingOverflow: false,
+              allowDrawingOverflow: true,
               filterQuality: FilterQuality.high,
-              preferredSize: Size(MediaQuery.of(context).size.width,
-                  MediaQuery.of(context).size.height),
+              preferredSize: Size(
+                MediaQuery.of(context).size.width,
+                MediaQuery.of(context).size.height,
+              ),
             ),
           ),
           _generateLoginButton(
