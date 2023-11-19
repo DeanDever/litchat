@@ -48,6 +48,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "nickname": MessageLookupByLibrary.simpleMessage("Nickname"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "set_profile": MessageLookupByLibrary.simpleMessage("Set Profile"),
+        "sign_in_with_google":
+            MessageLookupByLibrary.simpleMessage("Sign in with Google"),
+        "sign_in_with_your_phone":
+            MessageLookupByLibrary.simpleMessage("Sign in with your phone"),
         "successed": MessageLookupByLibrary.simpleMessage("Successed"),
         "upload_your_avatar":
             MessageLookupByLibrary.simpleMessage("upload your avatar"),

@@ -110,6 +110,26 @@ class S {
     );
   }
 
+  /// `Sign in with Google`
+  String get sign_in_with_google {
+    return Intl.message(
+      'Sign in with Google',
+      name: 'sign_in_with_google',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in with your phone`
+  String get sign_in_with_your_phone {
+    return Intl.message(
+      'Sign in with your phone',
+      name: 'sign_in_with_your_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Set Profile`
   String get set_profile {
     return Intl.message(
