@@ -54,7 +54,8 @@ dependencies:
   package_info_plus: ^4.2.0
   # 设备信息
   device_info_plus: ^9.1.0
-
+  #json_serializable依赖
+  json_annotation: ^4.8.1
   #  # 音频播放/录制
   #  just_audio: ^0.9.36
   #  # 动画
