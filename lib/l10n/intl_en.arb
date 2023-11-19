@@ -2,5 +2,22 @@
   "launch_skip_btn": "Skip {timer}s",
   "successed": "Successed",
   "confirm": "Confirm",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "Next": "Next",
+  "ok": "OK",
+  "set_profile": "Set Profile",
+  "camera": "Camera",
+  "album": "Album",
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "nickname": "Nickname",
+  "enter_nickname": "Enter Nickname",
+  "enter_invite_code": "Enter invite code",
+  "upload_your_avatar": "upload your avatar",
+  "Sign_in_means_you_agree": "Sign in means you agree",
+  "user_agreement_user_privacy_policy": "User Agreement & User Privacy Policy",
+  "gender_cant_be_modified_after_selected": "Gender can't be modified after selected",
+  "gender_cant_be_modified_after_selected_please_confirm": "Gender can't be modified after selected. Please confirm.",
+  "we_keep_your_personal_information_private_and_safe": "We keep your personal information private and safe."
 }

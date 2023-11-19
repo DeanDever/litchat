@@ -89,6 +89,176 @@ class S {
       args: [],
     );
   }
+
+  /// `Next`
+  String get Next {
+    return Intl.message(
+      'Next',
+      name: 'Next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get ok {
+    return Intl.message(
+      'OK',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Profile`
+  String get set_profile {
+    return Intl.message(
+      'Set Profile',
+      name: 'set_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message(
+      'Camera',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Album`
+  String get album {
+    return Intl.message(
+      'Album',
+      name: 'album',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gender`
+  String get gender {
+    return Intl.message(
+      'Gender',
+      name: 'gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get male {
+    return Intl.message(
+      'Male',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Female`
+  String get female {
+    return Intl.message(
+      'Female',
+      name: 'female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nickname`
+  String get nickname {
+    return Intl.message(
+      'Nickname',
+      name: 'nickname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Nickname`
+  String get enter_nickname {
+    return Intl.message(
+      'Enter Nickname',
+      name: 'enter_nickname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter invite code`
+  String get enter_invite_code {
+    return Intl.message(
+      'Enter invite code',
+      name: 'enter_invite_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `upload your avatar`
+  String get upload_your_avatar {
+    return Intl.message(
+      'upload your avatar',
+      name: 'upload_your_avatar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in means you agree`
+  String get Sign_in_means_you_agree {
+    return Intl.message(
+      'Sign in means you agree',
+      name: 'Sign_in_means_you_agree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User Agreement & User Privacy Policy`
+  String get user_agreement_user_privacy_policy {
+    return Intl.message(
+      'User Agreement & User Privacy Policy',
+      name: 'user_agreement_user_privacy_policy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gender can't be modified after selected`
+  String get gender_cant_be_modified_after_selected {
+    return Intl.message(
+      'Gender can\'t be modified after selected',
+      name: 'gender_cant_be_modified_after_selected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gender can't be modified after selected. Please confirm.`
+  String get gender_cant_be_modified_after_selected_please_confirm {
+    return Intl.message(
+      'Gender can\'t be modified after selected. Please confirm.',
+      name: 'gender_cant_be_modified_after_selected_please_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We keep your personal information private and safe.`
+  String get we_keep_your_personal_information_private_and_safe {
+    return Intl.message(
+      'We keep your personal information private and safe.',
+      name: 'we_keep_your_personal_information_private_and_safe',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

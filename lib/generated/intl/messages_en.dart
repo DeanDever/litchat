@@ -24,9 +24,38 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Next": MessageLookupByLibrary.simpleMessage("Next"),
+        "Sign_in_means_you_agree":
+            MessageLookupByLibrary.simpleMessage("Sign in means you agree"),
+        "album": MessageLookupByLibrary.simpleMessage("Album"),
+        "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "enter_invite_code":
+            MessageLookupByLibrary.simpleMessage("Enter invite code"),
+        "enter_nickname":
+            MessageLookupByLibrary.simpleMessage("Enter Nickname"),
+        "female": MessageLookupByLibrary.simpleMessage("Female"),
+        "gender": MessageLookupByLibrary.simpleMessage("Gender"),
+        "gender_cant_be_modified_after_selected":
+            MessageLookupByLibrary.simpleMessage(
+                "Gender can\'t be modified after selected"),
+        "gender_cant_be_modified_after_selected_please_confirm":
+            MessageLookupByLibrary.simpleMessage(
+                "Gender can\'t be modified after selected. Please confirm."),
         "launch_skip_btn": m0,
-        "successed": MessageLookupByLibrary.simpleMessage("Successed")
+        "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "nickname": MessageLookupByLibrary.simpleMessage("Nickname"),
+        "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "set_profile": MessageLookupByLibrary.simpleMessage("Set Profile"),
+        "successed": MessageLookupByLibrary.simpleMessage("Successed"),
+        "upload_your_avatar":
+            MessageLookupByLibrary.simpleMessage("upload your avatar"),
+        "user_agreement_user_privacy_policy":
+            MessageLookupByLibrary.simpleMessage(
+                "User Agreement & User Privacy Policy"),
+        "we_keep_your_personal_information_private_and_safe":
+            MessageLookupByLibrary.simpleMessage(
+                "We keep your personal information private and safe.")
       };
 }
