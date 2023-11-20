@@ -1,7 +1,8 @@
+import 'package:litchat/network/network_api.dart';
 import 'package:litchat/network/network_request.dart';
 import 'package:litchat/network/network_response.dart';
 
-typedef HeaderConfigureCallback = Map<String, dynamic>? Function();
+typedef HeaderConfigureCallback = Map<String, dynamic>? Function(NetworkRequest request);
 typedef NetworkErrorPluginCallback = void Function(
     NetworkRequest request, NetworkResponse response);
 

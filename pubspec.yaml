@@ -66,6 +66,8 @@ dependencies:
   dio_cache_interceptor: ^3.4.4
   # svga播放
   svgaplayer_flutter: ^2.2.0
+  # 加密
+  crypto: ^3.0.3
 
 dev_dependencies:
   flutter_test:

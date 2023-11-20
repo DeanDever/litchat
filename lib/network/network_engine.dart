@@ -8,7 +8,7 @@ import 'network_api.dart';
 
 class NetworkEngine {
   // Global options
-  static final _options = CacheOptions(
+  final _options = CacheOptions(
     // A default store is required for interceptor.
     store: MemCacheStore(),
 
@@ -31,14 +31,18 @@ class NetworkEngine {
     allowPostMethod: false,
   );
 
-  final Dio _dio = Dio()
-    ..interceptors.add(DioCacheInterceptor(options: _options));
+  final Dio _dio = Dio();
 
   NetworkConfiguration _configuration =
       NetworkConfiguration(rootUrl: 'https://api.github.com');
 
   //  单例
-  NetworkEngine._internal();
+  NetworkEngine._internal() {
+      _dio.interceptors.add(DioCacheInterceptor(options: _options));
+      if (_configuration.enableLog) {
+        _dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+      }
+  }
 
   factory NetworkEngine() => _instance;
 
@@ -48,13 +52,13 @@ class NetworkEngine {
     _configuration = configuration;
   }
 
-  Future<NetworkResponse> sendRquest(NetworkRequest request) async {
+  Future<NetworkResponse<T>> sendRquest<T>(NetworkRequest request) async {
     String url = _configuration.rootUrl + request.api.uri;
 
     //  请求头
     Map<String, dynamic>? headers;
     if (_configuration.headerConfigureCallback != null) {
-      headers = _configuration.headerConfigureCallback!();
+      headers = _configuration.headerConfigureCallback!(request);
     }
 
     Options option = Options(
@@ -79,27 +83,28 @@ class NetworkEngine {
         break;
     }
 
-    NetworkResponse res;
+    NetworkResponse<T> res;
     if (r != null) {
-      res = NetworkResponse.fromJson(r.data);
+      res = NetworkResponse<T>.fromJson(r.data);
     } else {
-      res = NetworkResponse(status: -1, error: 'request type error');
+      res = NetworkResponse<T>();
+      res.error = 'request type error';
     }
 
-    if (res.status != 200) {
+    if (res.status != 0) {
       if (_configuration.errorCallback != null) {
         _configuration.errorCallback!(request, res);
       }
+      return throw res.error ?? 'unknown error';
+    } else {
+      return res;
     }
-    return res;
   }
 
   Future<void> download(String url, String destinationPath,
       void Function(int count, int total) progressCallback) async {
-    Response response;
-    response = await _dio.download(url, destinationPath,
-        onReceiveProgress: progressCallback);
-    return Future(() => null);
+     await _dio.download(url, onReceiveProgress: progressCallback,
+        destinationPath);
   }
 
 }

@@ -1,18 +1,22 @@
-import 'package:json_annotation/json_annotation.dart';
-part 'network_response.g.dart';
+import 'package:litchat/generated/json/base/json_field.dart';
+
+import '../generated/json/network_response.g.dart';
 
 @JsonSerializable()
-class NetworkResponse {
+class NetworkResponse<T> {
+	//	状态码
+	int status = -1;
+	//	返回体
+	Map<String, dynamic>? content;
+	//	错误信息
+	String? error;
+	// 序列化对象
+	T? object;
 
-  @JsonKey(name: 'status')
-  int status = -1;
-  @JsonKey(name: 'content')
-  Map<String, dynamic>? content;
-  @JsonKey(name: 'error')
-  String? error;
+	NetworkResponse();
 
-  NetworkResponse({required this.status, this.content, this.error});
+	factory NetworkResponse.fromJson(Map<String, dynamic> json) => $NetworkResponseFromJson<T>(json);
 
-  factory NetworkResponse.fromJson(Map<String, dynamic> json) => _$NetworkResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$NetworkResponseToJson(this);
+	Map<String, dynamic> toJson() => $NetworkResponseToJson(this);
+
 }

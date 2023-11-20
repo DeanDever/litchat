@@ -4,6 +4,8 @@ import 'package:litchat/generated/l10n.dart';
 import 'package:svgaplayer_flutter/parser.dart';
 import 'package:svgaplayer_flutter/player.dart';
 
+import '../../../network/api/system_api.dart';
+
 class LoginPager extends StatefulWidget {
   const LoginPager({super.key});
 
@@ -22,6 +24,7 @@ class _LoginPagerState extends State<LoginPager>
     super.initState();
     _bgController = SVGAAnimationController(vsync: this);
     _loadAnimation();
+    _getAppConfiguration();
   }
 
   @override
@@ -31,6 +34,17 @@ class _LoginPagerState extends State<LoginPager>
     super.dispose();
   }
 
+  /*获取App配置信息*/
+  void _getAppConfiguration() {
+    SystemAPIType.configurationCenter.configurationCenter()
+        .then((value) {
+      debugPrint('network success');
+    }).catchError((err) {
+      debugPrint('network error ${err}');
+    });
+  }
+
+  /*加载背景动画*/
   void _loadAnimation() async {
     final videoItem =
         await SVGAParser.shared.decodeFromAssets('assets/svga/login_bg.svga');
@@ -40,6 +54,7 @@ class _LoginPagerState extends State<LoginPager>
     });
   }
 
+  /*播放背景动画*/
   void _playAnimation() {
     if (_bgController?.isCompleted == true) {
       _bgController?.reset();
@@ -257,7 +272,7 @@ class _LoginPagerState extends State<LoginPager>
             bottom: 0,
             child: SVGAImage(
               _bgController!,
-              fit: BoxFit.fill,
+              fit: BoxFit.fitWidth,
               clearsAfterStop: true,
               allowDrawingOverflow: true,
               filterQuality: FilterQuality.high,
