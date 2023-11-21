@@ -1,7 +1,7 @@
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:litchat/business/login/controller/launcher_page_controller.dart';
 import 'package:litchat/business/login/pager/launch_pager.dart';
 import 'package:litchat/business/login/pager/login_pager.dart';
 import 'package:litchat/business/main/pager/main_pager.dart';
@@ -10,18 +10,26 @@ import 'package:litchat/network/network_configuration.dart';
 import 'package:litchat/network/network_engine.dart';
 import 'package:flutter/foundation.dart';
 import 'package:litchat/network/network_request.dart';
-
 import 'manager/LCTLocalizations.dart';
 import 'network/network_response.dart';
 import 'package:litchat/business/common/extension/string_extension.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
 
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+
+  runApp(
+    // To install Riverpod, we need to add this widget above everything else.
+    // This should not be inside "MyApp" but as direct parameter to "runApp".
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -43,7 +51,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       locale: LCTLocalizations().currentLocal,
       routes: {
-        '/': (BuildContext context) => const LaunchPager(),
+        '/': (BuildContext context) => LaunchPager(),
         '/Login': (BuildContext context) => const LoginPager(),
         '/Main': (BuildContext context) => const MainPager(),
       },
@@ -65,8 +73,8 @@ class MyApp extends StatelessWidget {
     });
 
     String platform = 'unknow';
-    String IDFA = 'unknow';
-    String UUID = 'unknow';
+    String idfa = 'unknow';
+    String uuid = 'unknow';
     String deviceName = 'unknow';
     String osVersion = 'unknow';
     String country = 'unknow';
@@ -78,7 +86,7 @@ class MyApp extends StatelessWidget {
         platform ='ANDROID';
         deviceInfo.androidInfo.then((value) {
           deviceName = value.model;
-          UUID = value.fingerprint;
+          uuid = value.fingerprint;
           osVersion = '${value.version.sdkInt}';
         });
         break;
@@ -103,8 +111,8 @@ class MyApp extends StatelessWidget {
     String area = 'PH';
 
     var headers = {
-    'udid': UUID,
-    'gaid': IDFA,
+    'udid': uuid,
+    'gaid': idfa,
     'device': deviceName,
     'osversion': osVersion,
     'platform': platform,
@@ -120,7 +128,7 @@ class MyApp extends StatelessWidget {
     headers["userid"] = uid;
     }
 
-    String signStr = _generateNetworkSignature(request.api.uri, UUID, uid, request.params, ts);
+    String signStr = _generateNetworkSignature(request.api.uri, uuid, uid, request.params, ts);
     if (signStr.isNotEmpty) {
     headers["sign"] = signStr;
     }
@@ -131,13 +139,12 @@ class MyApp extends StatelessWidget {
 
     });
     NetworkEngine().setConfiguration(configuration);
-
   }
 
-  String _generateNetworkSignature(String uri, String UUID, String uid,
+  String _generateNetworkSignature(String uri, String uuid, String uid,
       Map<String, dynamic>? params, int ts) {
     String paramsEncodeStr = _encodeParams(params);
-    String signStr = "${uri}\$${UUID}${uid}${ts}\$${paramsEncodeStr}&secret=dfghjkl&^%%#\$^%%&^*&23dx";
+    String signStr = "$uri\$$uuid$uid$ts\$$paramsEncodeStr&secret=dfghjkl&^%%#\$^%%&^*&23dx";
 
     return signStr.md5String();
   }
@@ -147,20 +154,20 @@ class MyApp extends StatelessWidget {
       return '';
     }
 
-    var keys = params!.keys.toList();
+    var keys = params.keys.toList();
     keys.sort((s1, s2) => s1.compareTo(s2));
 
     String res = '';
     for (String key in keys) {
-      Object value = params![key];
+      Object value = params[key];
       if (value is List) {
         continue;
       } else if (value is Map) {
         continue;
       } else if (res.isEmpty) {
-        res = '${key}=${value}';
+        res = '$key=$value';
       } else {
-        res + '&${key}=${value}';
+        res += '&$key=$value';
       }
     }
     return res;

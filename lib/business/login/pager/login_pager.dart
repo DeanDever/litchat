@@ -266,6 +266,16 @@ class _LoginPagerState extends State<LoginPager>
       body: Stack(
         children: [
           Positioned(
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            child: Image.asset(
+              'assets/app_launch_img.png',
+              fit: BoxFit.fill,
+            ),
+          ),
+          Positioned(
             right: 0,
             left: 0,
             top: 0,
