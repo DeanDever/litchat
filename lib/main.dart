@@ -1,16 +1,13 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:litchat/business/login/controller/launcher_page_controller.dart';
-import 'package:litchat/business/login/pager/launch_pager.dart';
-import 'package:litchat/business/login/pager/login_pager.dart';
-import 'package:litchat/business/main/pager/main_pager.dart';
 import 'package:litchat/generated/l10n.dart';
 import 'package:litchat/network/network_configuration.dart';
 import 'package:litchat/network/network_engine.dart';
 import 'package:flutter/foundation.dart';
 import 'package:litchat/network/network_request.dart';
 import 'manager/LCTLocalizations.dart';
+import 'manager/Router/app_router_delegate.dart';
 import 'network/network_response.dart';
 import 'package:litchat/business/common/extension/string_extension.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -32,7 +29,12 @@ void main() {
 
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
+  final AppRouterDelegate routerDelegate = AppRouterDelegate();
+
+  MyApp({super.key}) {
+    routerDelegate.push(name: '/');
+  }
 
   // This widget is the root of your application.
   @override
@@ -50,11 +52,9 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       locale: LCTLocalizations().currentLocal,
-      routes: {
-        '/': (BuildContext context) => LaunchPager(),
-        '/Login': (BuildContext context) => const LoginPager(),
-        '/Main': (BuildContext context) => const MainPager(),
-      },
+     home: Router(
+       routerDelegate: routerDelegate,
+     ),
     );
   }
 

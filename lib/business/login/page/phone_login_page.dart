@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PhoneLoginPager extends StatefulWidget {
-  const PhoneLoginPager({super.key});
+class PhoneLoginPage extends StatefulWidget {
+  const PhoneLoginPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _PhoneLoginPagerState();
+  State<StatefulWidget> createState() => _PhoneLoginPageState();
 }
 
-class _PhoneLoginPagerState extends State<PhoneLoginPager>
+class _PhoneLoginPageState extends State<PhoneLoginPage>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {

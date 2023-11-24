@@ -1,14 +1,15 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LaunchPagerController with ChangeNotifier {
-
-  var countDownTime = 5;
+class LaunchPagerController extends Notifier<int> {
 
   Timer? _timer;
 
-  bool isFinish = false;
+  @override
+  int build() {
+    return 3;
+  }
 
   void startTimer() {
     if (_timer != null) {
@@ -16,12 +17,9 @@ class LaunchPagerController with ChangeNotifier {
     }
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-
-      if (countDownTime <= 0) {
+      _decrement();
+      if (state <= 0) {
         stopTimer();
-      } else {
-        countDownTime--;
-        notifyListeners();
       }
     });
   }
@@ -31,8 +29,13 @@ class LaunchPagerController with ChangeNotifier {
       _timer?.cancel();
       _timer = null;
     }
-    isFinish = true;
-    notifyListeners();
+    if (state != 0) {
+      state = 0;
+    }
+  }
+
+  void _decrement() {
+    state--;
   }
 
 }

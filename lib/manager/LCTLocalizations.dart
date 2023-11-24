@@ -3,7 +3,7 @@ import 'dart:ui';
 
 class LCTLocalizations {
 
-  Locale _locale = Locale('en');
+  final Locale _locale = Locale('en');
 
 //  单例
   LCTLocalizations._internal() {

@@ -1,4 +1,3 @@
-import 'package:litchat/network/network_api.dart';
 import 'package:litchat/network/network_request.dart';
 import 'package:litchat/network/network_response.dart';
 

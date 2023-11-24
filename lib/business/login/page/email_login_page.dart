@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class EmailLoginPager extends StatefulWidget {
-  const EmailLoginPager({super.key});
+class EmailLoginPage extends StatefulWidget {
+  const EmailLoginPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _EmailLoginPagerStatue();
+  State<StatefulWidget> createState() => _EmailLoginPageStatue();
 }
 
-class _EmailLoginPagerStatue extends State<EmailLoginPager>
+class _EmailLoginPageStatue extends State<EmailLoginPage>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {

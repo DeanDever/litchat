@@ -1,19 +1,21 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:litchat/generated/l10n.dart';
+import 'package:litchat/manager/Router/app_router_delegate.dart';
 import 'package:svgaplayer_flutter/parser.dart';
 import 'package:svgaplayer_flutter/player.dart';
 
 import '../../../network/api/system_api.dart';
+import 'package:litchat/r.g.dart';
 
-class LoginPager extends StatefulWidget {
-  const LoginPager({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _LoginPagerState();
+  State<StatefulWidget> createState() => _LoginPageState();
 }
 
-class _LoginPagerState extends State<LoginPager>
+class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
   SVGAAnimationController? _bgController;
 
@@ -62,8 +64,10 @@ class _LoginPagerState extends State<LoginPager>
     _bgController?.repeat();
   }
 
-  void _onClickGoogleButton() {
+  void _onClickGoogleButton(BuildContext context) {
     debugPrint('click google button');
+    AppRouterDelegate routerDelegate = Router.of(context).routerDelegate as AppRouterDelegate;
+    routerDelegate.replace(name: '/Home');
   }
 
   void _onClickPhoneButton() {
@@ -98,7 +102,7 @@ class _LoginPagerState extends State<LoginPager>
   }
 
   Widget _generateLoginButton(
-      AssetImage image, String title, double bottom, VoidCallback onPressed) {
+      ImageProvider image, String title, double bottom, VoidCallback onPressed) {
     return Positioned(
       right: 72,
       left: 72,
@@ -134,7 +138,7 @@ class _LoginPagerState extends State<LoginPager>
     );
   }
 
-  Widget _generateCircleLoginButton(AssetImage image, VoidCallback onPressed) {
+  Widget _generateCircleLoginButton(ImageProvider image, VoidCallback onPressed) {
     return SizedBox(
       width: 48,
       height: 48,
@@ -154,7 +158,7 @@ class _LoginPagerState extends State<LoginPager>
   Widget _generateFacebookButton() {
     if (Theme.of(context).platform == TargetPlatform.android) {
       return _generateCircleLoginButton(
-        const AssetImage('assets/login/login_fb_btn.png'),
+        R.image.login_fb_btn(),
         () {
           _onClickFacebookButton();
         },
@@ -166,7 +170,7 @@ class _LoginPagerState extends State<LoginPager>
   Widget _generateAppleButton() {
     if (Theme.of(context).platform == TargetPlatform.iOS) {
       return _generateCircleLoginButton(
-        const AssetImage('assets/login/login_apple_btn.png'),
+        R.image.login_apple_btn(),
         () {
           _onClickAppleButton();
         },
@@ -188,7 +192,7 @@ class _LoginPagerState extends State<LoginPager>
           _generateFacebookButton(),
           SizedBox(width: isAndroid ? 24 : 0, height: 48),
           _generateCircleLoginButton(
-            const AssetImage('assets/login/login_line_btn.png'),
+           R.image.login_line_btn(),
             () {
               _onClickLineButton();
             },
@@ -197,7 +201,7 @@ class _LoginPagerState extends State<LoginPager>
           _generateAppleButton(),
           SizedBox(width: isIOS ? 24 : 0, height: 48),
           _generateCircleLoginButton(
-            const AssetImage('assets/login/login_email_btn.png'),
+            R.image.login_email_btn(),
             () {
               _onClickMailButton();
             },
@@ -219,12 +223,7 @@ class _LoginPagerState extends State<LoginPager>
             width: 24,
             height: 24,
             child: IconButton(
-              icon: Image.asset(
-                _isAgreePrivacy
-                    ? 'assets/common/common_checked_img.png'
-                    : 'assets/common/common_uncheck_img.png',
-                fit: BoxFit.fitWidth,
-              ),
+              icon: Image(image: _isAgreePrivacy ? R.image.common_checked_img() : R.image.common_uncheck_img()),
               iconSize: 24,
               padding: const EdgeInsets.all(4),
               onPressed: () {
@@ -270,10 +269,7 @@ class _LoginPagerState extends State<LoginPager>
             right: 0,
             top: 0,
             bottom: 0,
-            child: Image.asset(
-              'assets/app_launch_img.png',
-              fit: BoxFit.fill,
-            ),
+            child: Image(image: R.image.app_launch_img(),fit: BoxFit.fill),
           ),
           Positioned(
             right: 0,
@@ -293,13 +289,13 @@ class _LoginPagerState extends State<LoginPager>
             ),
           ),
           _generateLoginButton(
-              const AssetImage('assets/login/login_gg_btn.png'),
+              R.image.login_gg_btn(),
               S.of(context).sign_in_with_google,
               220, () {
-            _onClickGoogleButton();
+            _onClickGoogleButton(context);
           }),
           _generateLoginButton(
-              const AssetImage('assets/login/login_phone_btn.png'),
+            R.image.login_phone_btn(),
               S.of(context).sign_in_with_your_phone,
               156, () {
             _onClickPhoneButton();
